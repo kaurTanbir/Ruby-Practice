@@ -1,7 +1,7 @@
 class HEADCOUNT
 
 	def getLines(data)
-		lines = data.split("\n", 11);
+		lines = data.split("\n");
 		result =""
 
 		if lines.length < 10
@@ -18,11 +18,26 @@ class HEADCOUNT
 	end
 
 
+	def getSpecifiedLines(data,noOfLines)
+		lines = data.split("\n");
+		result = ""
+		for i in 0..noOfLines-1
+            result << ((lines[i]) << "\n");
+        end
+        result.to_s
+    end
+
 end
 
-	filename = ARGV.last
-	input = File.open(filename).read()
-	head = HEADCOUNT.new
+filename = ARGV.last
+input = File.open(filename).read()
+head = HEADCOUNT.new
+
+if ARGV.length<2
 	lines = head.getLines(input)
-	puts lines
+else
+	noOfLines = ARGV[0][2].to_i
+	lines = head.getSpecifiedLines(input,noOfLines)
+end
+puts lines
 
